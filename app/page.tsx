@@ -4,7 +4,7 @@ import LoopGrid from "@/components/LoopGrid";
 import FormatSpec from "@/components/FormatSpec";
 import { loops } from "@/lib/loops";
 
-const BASE = "https://agentloophub.com";
+const BASE = "https://www.agentloophub.com";
 
 const jsonLd = {
   "@context": "https://schema.org",

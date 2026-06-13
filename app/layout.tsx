@@ -6,7 +6,7 @@ import ThemeManager from "@/components/ThemeManager";
 import { themeInitScript } from "@/lib/theme";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://agentloophub.com"),
+  metadataBase: new URL("https://www.agentloophub.com"),
   title: {
     default: "agentLoopHub — Loop Engineering Templates & Tools",
     template: "%s · agentLoopHub",
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   description:
     "Copy-paste agent loop templates for Claude Code, Codex and OpenClaw — cron triggers, verify steps, exit conditions and real token costs per cycle.",
   alternates: { canonical: "/" },
-  openGraph: { siteName: "agentLoopHub", type: "website", url: "https://agentloophub.com" },
+  openGraph: { siteName: "agentLoopHub", type: "website", url: "https://www.agentloophub.com" },
   twitter: { card: "summary_large_image" },
   icons: {
     icon: [

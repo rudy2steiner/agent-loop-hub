@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { loops } from "@/lib/loops";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const base = "https://agentloophub.com";
+  const base = "https://www.agentloophub.com";
   return [
     { url: base, changeFrequency: "daily", priority: 1 },
     { url: `${base}/loops`, changeFrequency: "daily", priority: 0.9 },
