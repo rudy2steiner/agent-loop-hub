@@ -29,8 +29,8 @@ export default function Footer() {
         </div>
         <div>
           <h5>Network</h5>
-          <a href="https://open-prompts.com" target="_blank" rel="noopener">open-prompts.com</a>
-          <a href="https://3dtextgenerator.com" target="_blank" rel="noopener">3dtextgenerator.com</a>
+          <a href="https://www.open-prompts.com" target="_blank" rel="noopener">GPT Image 2 Prompots</a>
+          <a href="https://wwww.3dtextgenerator.com" target="_blank" rel="noopener">3D Text Generator</a>
         </div>
       </div>
       <div className="wrap fbottom">

@@ -10,8 +10,8 @@ export default function Nav() {
         <div className="wrap">
           <span><span className="dot" />6 LOOPS IN LIBRARY · GROWN BY ITS OWN LOOPS</span>
           <span className="net">NETWORK:
-            <a href="https://open-prompts.com" target="_blank" rel="noopener">open-prompts</a>
-            <a href="https://3dtextgenerator.com" target="_blank" rel="noopener">3dtextgenerator</a>
+            <a href="https://wwww.open-prompts.com" target="_blank" rel="noopener">GPT Image 2 Prompots</a>
+            <a href="https://wwww.3dtextgenerator.com" target="_blank" rel="noopener">3D Text Generator</a>
           </span>
         </div>
       </div>
