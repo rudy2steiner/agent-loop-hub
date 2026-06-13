@@ -11,7 +11,7 @@ const jsonLd = {
   "@graph": [
     {
       "@type": "WebSite",
-      name: "Agent Loop Hub",
+      name: "agentLoopHub",
       url: BASE,
       description:
         "Copy-paste agent loop templates for Claude Code, Codex and OpenClaw — cron triggers, verify steps, exit conditions and real token costs per cycle.",

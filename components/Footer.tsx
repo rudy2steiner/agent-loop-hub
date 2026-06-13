@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Logo from "@/components/Logo";
+import Wordmark from "@/components/Wordmark";
 
 export default function Footer() {
   return (
@@ -8,7 +9,7 @@ export default function Footer() {
         <div>
           <div className="flogo">
             <Logo size={24} idPrefix="footer-logo" variant="compact" />
-            agentloophub
+            <Wordmark />
           </div>
           <p className="fnote">
             The reference library for loop engineering. This site is grown by its own loops —
@@ -34,7 +35,7 @@ export default function Footer() {
         </div>
       </div>
       <div className="wrap fbottom">
-        <span>© 2026 AGENTLOOPHUB · MIT-LICENSED TEMPLATES</span>
+        <span>© 2026 agentLoopHub · MIT-LICENSED TEMPLATES</span>
         <span>BUILT BY LOOPS, APPROVED BY HUMANS</span>
       </div>
     </footer>

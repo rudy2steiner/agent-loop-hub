@@ -1,31 +1,45 @@
 "use client";
-import { useEffect, useState } from "react";
 
-type Theme = "light" | "dark";
+import { useEffect, useState } from "react";
+import {
+  persistThemeChoice,
+  readThemeCookie,
+  readThemeFromDom,
+  type Theme,
+} from "@/lib/theme";
+
+function currentTheme(): Theme {
+  return readThemeCookie() ?? readThemeFromDom();
+}
 
 export default function ThemeToggle() {
-  const [theme, setTheme] = useState<Theme>("light");
+  const [theme, setTheme] = useState<Theme>("dark");
 
   useEffect(() => {
-    const current = document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "light";
-    setTheme(current);
+    setTheme(currentTheme());
+    const onThemeChange = (e: Event) => {
+      const detail = (e as CustomEvent<Theme>).detail;
+      setTheme(detail ?? currentTheme());
+    };
+    window.addEventListener("themechange", onThemeChange);
+    return () => window.removeEventListener("themechange", onThemeChange);
   }, []);
 
   const toggle = () => {
-    const next: Theme = theme === "dark" ? "light" : "dark";
+    const next: Theme = currentTheme() === "dark" ? "light" : "dark";
+    persistThemeChoice(next);
     setTheme(next);
-    if (next === "dark") document.documentElement.setAttribute("data-theme", "dark");
-    else document.documentElement.removeAttribute("data-theme");
-    try { localStorage.setItem("theme", next); } catch {}
   };
 
   return (
     <button
       type="button"
       className="theme-toggle"
+      data-current={theme}
       onClick={toggle}
       aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
-      title={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+      aria-pressed={theme === "dark"}
+      title={`${theme === "dark" ? "Dark" : "Light"} mode · click for ${theme === "dark" ? "light" : "dark"}`}
     >
       <svg className="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />

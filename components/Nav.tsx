@@ -1,7 +1,8 @@
 import Link from "next/link";
 import Logo from "@/components/Logo";
-import NavLinks from "@/components/NavLinks";
+import NavLinks, { MobileMenu } from "@/components/NavLinks";
 import ThemeToggle from "@/components/ThemeToggle";
+import Wordmark from "@/components/Wordmark";
 
 export default function Nav() {
   return (
@@ -17,15 +18,16 @@ export default function Nav() {
       </div>
       <nav className="site">
         <div className="wrap">
-          <Link className="logo" href="/" aria-label="Agent Loop Hub home">
+          <Link className="logo" href="/" aria-label="agentLoopHub home">
             <Logo size={28} idPrefix="nav-logo" variant="compact" />
-            agentloop<span className="hub">hub</span>
+            <Wordmark />
           </Link>
           <NavLinks />
           <div className="nav-right">
             <ThemeToggle />
-            <a className="btn" href="https://github.com/rudy2steiner/awesome-agent-loops" target="_blank" rel="noopener">★ Awesome list</a>
-            <Link className="btn primary" href="/loops">Browse loops</Link>
+            <a className="btn nav-desktop-only" href="https://github.com/rudy2steiner/awesome-agent-loops" target="_blank" rel="noopener">★ Awesome list</a>
+            <Link className="btn primary nav-desktop-only" href="/loops">Browse loops</Link>
+            <MobileMenu />
           </div>
         </div>
       </nav>

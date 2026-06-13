@@ -1,18 +1,21 @@
 import type { Metadata } from "next";
+import { cookies } from "next/headers";
 import "./globals.css";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
+import ThemeManager from "@/components/ThemeManager";
+import { parseThemeCookie, themeInitScript, THEME_COOKIE } from "@/lib/theme";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://agentloophub.com"),
   title: {
-    default: "Agent Loop Hub — Loop Engineering Templates & Tools",
-    template: "%s · Agent Loop Hub",
+    default: "agentLoopHub — Loop Engineering Templates & Tools",
+    template: "%s · agentLoopHub",
   },
   description:
     "Copy-paste agent loop templates for Claude Code, Codex and OpenClaw — cron triggers, verify steps, exit conditions and real token costs per cycle.",
   alternates: { canonical: "/" },
-  openGraph: { siteName: "Agent Loop Hub", type: "website", url: "https://agentloophub.com" },
+  openGraph: { siteName: "agentLoopHub", type: "website", url: "https://agentloophub.com" },
   twitter: { card: "summary_large_image" },
   icons: {
     icon: [
@@ -25,10 +28,14 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const cookieStore = await cookies();
+  const savedTheme = parseThemeCookie(cookieStore.get(THEME_COOKIE)?.value);
+
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning {...(savedTheme ? { "data-theme": savedTheme } : {})}>
       <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
@@ -36,15 +43,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           rel="stylesheet"
         />
         <script defer data-domain="agentloophub.com" src="https://app.pageview.app/js/script.js"></script>
-
-        <script
-          dangerouslySetInnerHTML={{
-            __html:
-              "(function(){try{var t=localStorage.getItem('theme');if(t==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();",
-          }}
-        />
       </head>
       <body>
+        <ThemeManager />
         <Nav />
         {children}
         <Footer />
