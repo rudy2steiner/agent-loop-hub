@@ -35,6 +35,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=JetBrains+Mono:wght@400;500;700&display=swap"
           rel="stylesheet"
         />
+        <script defer data-domain="agentloophub.com" src="https://app.pageview.app/js/script.js"></script>
+
         <script
           dangerouslySetInnerHTML={{
             __html:
