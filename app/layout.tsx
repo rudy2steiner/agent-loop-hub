@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
-import { cookies } from "next/headers";
 import "./globals.css";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import ThemeManager from "@/components/ThemeManager";
-import { parseThemeCookie, themeInitScript, THEME_COOKIE } from "@/lib/theme";
+import { themeInitScript } from "@/lib/theme";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://agentloophub.com"),
@@ -28,12 +27,9 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const cookieStore = await cookies();
-  const savedTheme = parseThemeCookie(cookieStore.get(THEME_COOKIE)?.value);
-
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning {...(savedTheme ? { "data-theme": savedTheme } : {})}>
+    <html lang="en" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
