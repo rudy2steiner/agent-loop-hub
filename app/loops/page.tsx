@@ -7,8 +7,9 @@ export const metadata: Metadata = {
   alternates: { canonical: "/loops" },
 };
 
-export default async function LoopsPage({ searchParams }: { searchParams: Promise<{ cat?: string }> }) {
-  const { cat } = await searchParams;
+export const dynamic = "force-static";
+
+export default function LoopsPage() {
   return (
     <main>
       <section>
@@ -20,7 +21,7 @@ export default async function LoopsPage({ searchParams }: { searchParams: Promis
               <p>Each template is a seven-field spec plus runnable code. Filter by category.</p>
             </div>
           </div>
-          <LoopGrid initial={cat ?? "all"} />
+          <LoopGrid />
         </div>
       </section>
     </main>

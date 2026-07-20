@@ -1,10 +1,19 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { loops, categories, type LoopCategory } from "@/lib/loops";
 
+const categoryIds = new Set<string>(categories.map((c) => c.id));
+
 export default function LoopGrid({ initial = "all" }: { initial?: string }) {
   const [cat, setCat] = useState<LoopCategory | "all">(initial as LoopCategory | "all");
+  useEffect(() => {
+    const value = new URLSearchParams(window.location.search).get("cat");
+    if (value && categoryIds.has(value)) {
+      setCat(value as LoopCategory);
+    }
+  }, []);
+
   const shown = loops.filter((l) => cat === "all" || l.category === cat);
   return (
     <>

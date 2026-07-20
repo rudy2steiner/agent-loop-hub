@@ -4,8 +4,18 @@ import { notFound } from "next/navigation";
 import { loops, getLoop } from "@/lib/loops";
 import CopyButton from "@/components/CopyButton";
 
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return loops.map((l) => ({ slug: l.slug }));
+}
+
+const TITLE_SUFFIX_LENGTH = " | agentLoopHub.com".length;
+const MAX_TITLE_LENGTH = 60;
+
+function titleForLoop(loop: NonNullable<ReturnType<typeof getLoop>>) {
+  const title = `${loop.name} template`;
+  return title.length + TITLE_SUFFIX_LENGTH <= MAX_TITLE_LENGTH ? title : loop.name;
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
@@ -13,7 +23,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const loop = getLoop(slug);
   if (!loop) return {};
   return {
-    title: `${loop.name} template`,
+    title: titleForLoop(loop),
     description: `${loop.goal} Trigger: ${loop.trigger}. Verify: ${loop.verify} ${loop.tokensPerCycle} tokens per cycle.`,
     alternates: { canonical: `/loops/${slug}` },
   };

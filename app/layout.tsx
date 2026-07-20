@@ -8,8 +8,8 @@ import { themeInitScript } from "@/lib/theme";
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.agentloophub.com"),
   title: {
-    default: "agentLoopHub — Loop Engineering Templates & Tools",
-    template: "%s · agentLoopHub",
+    default: "Loop Engineering Templates & Tools | agentLoopHub.com",
+    template: "%s | agentLoopHub.com",
   },
   description:
     "Copy-paste agent loop templates for Claude Code, Codex and OpenClaw — cron triggers, verify steps, exit conditions and real token costs per cycle.",
