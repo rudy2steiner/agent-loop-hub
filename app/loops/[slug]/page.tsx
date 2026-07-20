@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { loops, getLoop } from "@/lib/loops";
+import CopyButton from "@/components/CopyButton";
 
 export function generateStaticParams() {
   return loops.map((l) => ({ slug: l.slug }));
@@ -32,11 +33,46 @@ function rowsOf(l: NonNullable<ReturnType<typeof getLoop>>) {
   return { goal, trigger, discover, act, verify, persist, exit };
 }
 
+function markdownOf(loop: NonNullable<ReturnType<typeof getLoop>>) {
+  const lines = [
+    `# ${loop.name}`,
+    "",
+    loop.goal,
+    "",
+    "## Seven-field spec",
+    `- Goal: ${loop.goal}`,
+    `- Trigger: ${loop.trigger}`,
+    `- Discover: ${loop.discover}`,
+    `- Act: ${loop.act}`,
+    `- Verify: ${loop.verify}`,
+    `- Persist: ${loop.persist}`,
+    `- Exit: ${loop.exit}`,
+    "",
+    "## Runtime",
+    `- Runtime: ${loop.runtime}`,
+    `- Tokens per cycle: ${loop.tokensPerCycle}`,
+    "",
+    "## Runnable code",
+    "```",
+    loop.code,
+    "```",
+  ];
+
+  if (loop.whenToUse) lines.push("", "## When to use", loop.whenToUse);
+  if (loop.requiredTools?.length) lines.push("", "## Required tools", ...loop.requiredTools.map((item) => `- ${item}`));
+  if (loop.humanGates?.length) lines.push("", "## Human gates", ...loop.humanGates.map((item) => `- ${item}`));
+  if (loop.failureModes?.length) lines.push("", "## Failure modes", ...loop.failureModes.map((item) => `- ${item}`));
+  if (loop.minimumVerifier) lines.push("", "## Minimum verifier", loop.minimumVerifier);
+
+  return lines.join("\n");
+}
+
 export default async function LoopPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const loop = getLoop(slug);
   if (!loop) notFound();
   const rows = rowsOf(loop);
+  const markdown = markdownOf(loop);
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -69,7 +105,54 @@ export default async function LoopPage({ params }: { params: Promise<{ slug: str
           </div>
         </div>
 
-        <h2 style={{ marginBottom: 14 }}>Runnable code</h2>
+        {(loop.whenToUse || loop.requiredTools?.length || loop.humanGates?.length || loop.failureModes?.length || loop.minimumVerifier) && (
+          <div className="enhanced-spec">
+            {loop.whenToUse && (
+              <div>
+                <h2>When to use</h2>
+                <p>{loop.whenToUse}</p>
+              </div>
+            )}
+            {loop.minimumVerifier && (
+              <div>
+                <h2>Minimum verifier</h2>
+                <p>{loop.minimumVerifier}</p>
+              </div>
+            )}
+            {loop.requiredTools?.length ? (
+              <div>
+                <h2>Required tools</h2>
+                <ul>{loop.requiredTools.map((item) => <li key={item}>{item}</li>)}</ul>
+              </div>
+            ) : null}
+            {loop.humanGates?.length ? (
+              <div>
+                <h2>Human gates</h2>
+                <ul>{loop.humanGates.map((item) => <li key={item}>{item}</li>)}</ul>
+              </div>
+            ) : null}
+            {loop.failureModes?.length ? (
+              <div>
+                <h2>Failure modes</h2>
+                <ul>{loop.failureModes.map((item) => <li key={item}>{item}</li>)}</ul>
+              </div>
+            ) : null}
+          </div>
+        )}
+
+        <div className="code-head">
+          <h2>Runnable code</h2>
+          <div className="code-actions">
+            <CopyButton text={loop.code} />
+            <a
+              className="mini-action"
+              href={`data:text/markdown;charset=utf-8,${encodeURIComponent(markdown)}`}
+              download={`${loop.slug}.md`}
+            >
+              Download .md
+            </a>
+          </div>
+        </div>
         <pre className="codeblock">{loop.code}</pre>
 
         <p style={{ color: "var(--ink-soft)", fontSize: 14 }}>

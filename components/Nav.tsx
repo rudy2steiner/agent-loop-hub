@@ -3,13 +3,14 @@ import Logo from "@/components/Logo";
 import NavLinks, { MobileMenu } from "@/components/NavLinks";
 import ThemeToggle from "@/components/ThemeToggle";
 import Wordmark from "@/components/Wordmark";
+import { loops } from "@/lib/loops";
 
 export default function Nav() {
   return (
     <>
       <div className="statusbar">
         <div className="wrap">
-          <span><span className="dot" />6 LOOPS IN LIBRARY · GROWN BY ITS OWN LOOPS</span>
+          <span><span className="dot" />{loops.length} LOOPS IN LIBRARY · GROWN BY ITS OWN LOOPS</span>
           <span className="net">NETWORK:
             <a href="https://www.open-prompts.com" target="_blank" rel="noopener">GPT Image 2 Prompts</a>
             <a href="https://www.3dtextgenerator.com" target="_blank" rel="noopener">3D Text Generator</a>

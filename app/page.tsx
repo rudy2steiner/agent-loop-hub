@@ -73,6 +73,34 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="runtime-links">
+        <div className="wrap">
+          <div className="sec-head">
+            <div>
+              <h2>Choose your agent runtime</h2>
+              <p>Start from templates tuned for the agent you actually run, then generate a command from the same seven-field loop spec.</p>
+            </div>
+          </div>
+          <div className="runtime-grid">
+            <Link className="runtime-card" href="/codex-loops">
+              <span>Codex</span>
+              <h3>Codex loops</h3>
+              <p>Repository-safe loops for tests, builds, scoped edits, AGENTS.md rules, and verified pull request work.</p>
+            </Link>
+            <Link className="runtime-card" href="/claude-code-loops">
+              <span>Claude Code</span>
+              <h3>Claude Code loops</h3>
+              <p>Loop patterns for project skills, discovery tasks, review gates, and controlled autonomous coding cycles.</p>
+            </Link>
+            <Link className="runtime-card" href="/agent-loop-generator">
+              <span>Command tool</span>
+              <h3>Agent Loop Generator</h3>
+              <p>Edit a loop spec, check readiness, and generate Generic, Codex, or Claude Code commands.</p>
+            </Link>
+          </div>
+        </div>
+      </section>
+
       <section className="teaser">
         <div className="wrap">
           <h2>What is loop engineering?</h2>

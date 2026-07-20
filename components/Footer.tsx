@@ -21,16 +21,26 @@ export default function Footer() {
           <Link href="/loops">All loops</Link>
           <Link href="/loops?cat=coding">Coding loops</Link>
           <Link href="/loops?cat=content">Content loops</Link>
+          <Link href="/codex-loops">Codex loops</Link>
+          <Link href="/claude-code-loops">Claude Code loops</Link>
+        </div>
+        <div>
+          <h5>Tools</h5>
+          <Link href="/agent-loop-generator">Agent Loop Generator</Link>
+          <Link href="/agent-loop-template">Agent loop template</Link>
+          <Link href="/agent-loop-examples">Agent loop examples</Link>
           <Link href="/#format">Format spec</Link>
         </div>
         <div>
           <h5>Learn</h5>
           <Link href="/what-is-loop-engineering">What is loop engineering?</Link>
+          <Link href="/loop-engineering-vs-prompt-engineering">Loop vs prompt engineering</Link>
+          <Link href="/loop-engineering-vs-agentic-workflows">Loop vs agentic workflows</Link>
           <a href="https://github.com/rudy2steiner/awesome-agent-loops" target="_blank" rel="noopener">Awesome Agent Loops</a>
         </div>
         <div>
           <h5>Network</h5>
-          <a href="https://www.open-prompts.com" target="_blank" rel="noopener">GPT Image 2 Prompots</a>
+          <a href="https://www.open-prompts.com" target="_blank" rel="noopener">GPT Image 2 Prompts</a>
           <a href="https://www.3dtextgenerator.com" target="_blank" rel="noopener">3D Text Generator</a>
         </div>
       </div>
